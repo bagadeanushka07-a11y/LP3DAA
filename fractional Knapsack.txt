@@ -1,0 +1,41 @@
+# Fractional Knapsack Problem using Greedy Method
+
+# Number of items
+n = 3
+
+# Weight and Profit of each item
+weights = [10, 20, 30]
+profits = [60, 100, 120]
+
+# Knapsack capacity
+capacity = 50
+
+# Calculate profit/weight ratio
+items = []
+
+for i in range(n):
+    ratio = profits[i] / weights[i]
+    items.append((ratio, weights[i], profits[i]))
+
+# Sort items according to ratio in descending order
+items.sort(reverse=True)
+
+total_profit = 0
+
+# Select items using Greedy Method
+for ratio, weight, profit in items:
+
+    if capacity >= weight:
+        # Take the complete item
+        capacity -= weight
+        total_profit += profit
+
+    else:
+        # Take fractional part of the item
+        fraction = capacity / weight
+        total_profit += profit * fraction
+        capacity = 0
+        break
+
+# Display maximum profit
+print("Maximum Profit:", total_profit)
